@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping Site</title>
+    
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        /* Header Section */
+        header {
+            background-color: #2874f0;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo h1 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            display: flex;
+            align-items: center;
+        }
+
+        header nav ul li {
+            margin: 0 20px;
+        }
+
+        header nav ul li a {
+            color: white;
+            font-size: 16px;
+            text-transform: uppercase;
+            padding: 10px;
+        }
+
+        header nav ul li a:hover {
+            background-color: #1f65b3;
+            border-radius: 5px;
+        }
+
+        header .search-bar input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        header .search-bar button {
+            padding: 10px 15px;
+            background-color: #ff9f00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        header .search-bar button:hover {
+            background-color: #e68900;
+        }
+
+        /* Banner Section */
+        .banner {
+            background: url('https://via.placeholder.com/1920x500?text=Sale+Up+to+50%25+Off') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 100px 30px;
+        }
+
+        .banner h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .banner p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .banner .cta-button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #ff9f00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .banner .cta-button:hover {
+            background-color: #e68900;
+        }
+
+        /* Product Section */
+        #products {
+            padding: 50px 30px;
+            background-color: white;
+        }
+
+        #products h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .product h3 {
+            font-size: 20px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .product .price {
+            font-size: 18px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .product button {
+            background-color: #2874f0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .product button:hover {
+            background-color: #1f65b3;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Cart Section */
+        #cart {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 250px;
+            font-size: 16px;
+        }
+
+        #cart h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        #cart ul {
+            margin-bottom: 15px;
+        }
+
+        #cart ul li {
+            font-size: 16px;
+            padding: 5px 0;
+        }
+
+        #cart .total {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-list {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            header .search-bar input[type="text"] {
+                width: 200px;
+            }
+
+            header .search-bar button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+
+            .banner h2 {
+                font-size: 32px;
+            }
+
+            .banner p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>My Shopping Site</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#cart" id="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for products...">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section id="home">
+        <div class="banner">
+            <h2>Welcome to Our Online Shop!</h2>
+            <p>Find amazing products at unbeatable prices.</p>
+            <button class="cta-button">Shop Now</button>
+        </div>
+    </section>
+
+    <section id="products">
+        <h2>Featured Products</h2>
+        <div class="product-list">
+            <div class="product" data-id="1" data-name="Product 1" data-price="19.99">
+                <img src="https://via.placeholder.com/300x200?text=Product+1" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>Description of product 1.</p>
+                <p class="price">$19.99</p>
+                <button onclick="addToCart(event)">Add to Cart</button>
+            </div>
+
+            <div class="product" data-id="2" data-name="Product 2" data-price="29.99">
+                <img src="https://via.placeholder.com/300x200?text=Product+2" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>Description of product 2.</p>
+                <p class="price">$29.99</p>
+                <button onclick="addToCart(event)">Add to Cart</button>
+            </div>
+
+            <div class="product" data-id="3" data-name="Product 3" data-price="39.99">
+                <img src="https://via.placeholder.com/300x200?text=Product+3" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>Description of product 3.</p>
+                <p class="price">$39.99</p>
+                <button onclick="addToCart(event)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <div id="cart">
+        <h3>Your Cart</h3>
+        <ul id="cart-items">
+            <li>No items in cart.</li>
+        </ul>
+        <div class="total">Total: $<span id="cart-total">0.00</span></div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 My Shopping Site. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        const cartCountElement = document.getElementById("cart-count");
+        const cartItemsElement = document.getElementById("cart-items");
+        const cartTotalElement = document.getElementById("cart-total");
+
+        function addToCart(event) {
+            const productElement = event.target.closest(".product");
+            const productId = productElement.getAttribute("data-id");
+            const productName = productElement.getAttribute("data-name");
+            const productPrice = parseFloat(productElement.getAttribute("data-price"));
+
+            const product = {
+                id: productId,
+                name: productName,
+                price: productPrice
+            };
+
+            // Add the product to the cart
+            cart.push(product);
+
+            // Update cart display
+            updateCart();
+        }
+
+        function updateCart() {
+            // Update cart count and total
+            const cartCount = cart.length;
+            let total = 0;
+            cartItemsElement.innerHTML = ""; // Clear previous items
+
+            cart.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                cartItemsElement.appendChild(li);
+                total += item.price;
+            });
+
+            // Update cart count and total
+            cartCountElement.textContent = cartCount;
+            cartTotalElement.textContent = total.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
